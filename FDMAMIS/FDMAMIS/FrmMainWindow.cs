@@ -16,5 +16,10 @@ namespace FDMAMIS
         {
             InitializeComponent();
         }
+
+        private void FrmMainWindow_Load(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

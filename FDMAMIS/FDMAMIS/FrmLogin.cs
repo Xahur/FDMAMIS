@@ -17,10 +17,10 @@ namespace FDMAMIS
         private Button btnLogin;
         private TextBox txtUserName;
         private TextBox txtUserPassword;
-        private Label label1;
-        private Label label2;
+        private Label lblUserName;
+        private Label lblUserPassword;
         private Label lblHeader;
-        private Label label4;
+        private Label lblLoginFooter;
         private GroupBox groupBox1;
 
         public FrmLogin()
@@ -41,11 +41,11 @@ namespace FDMAMIS
             this.btnLogin = new System.Windows.Forms.Button();
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.txtUserPassword = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblUserName = new System.Windows.Forms.Label();
+            this.lblUserPassword = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblHeader = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblLoginFooter = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnLoginCancel
@@ -82,23 +82,23 @@ namespace FDMAMIS
             this.txtUserPassword.Size = new System.Drawing.Size(272, 20);
             this.txtUserPassword.TabIndex = 2;
             // 
-            // label1
+            // lblUserName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(80, 91);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "User Name";
+            this.lblUserName.AutoSize = true;
+            this.lblUserName.Location = new System.Drawing.Point(80, 91);
+            this.lblUserName.Name = "lblUserName";
+            this.lblUserName.Size = new System.Drawing.Size(60, 13);
+            this.lblUserName.TabIndex = 5;
+            this.lblUserName.Text = "User Name";
             // 
-            // label2
+            // lblUserPassword
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(80, 117);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Password";
+            this.lblUserPassword.AutoSize = true;
+            this.lblUserPassword.Location = new System.Drawing.Point(80, 117);
+            this.lblUserPassword.Name = "lblUserPassword";
+            this.lblUserPassword.Size = new System.Drawing.Size(53, 13);
+            this.lblUserPassword.TabIndex = 6;
+            this.lblUserPassword.Text = "Password";
             // 
             // groupBox1
             // 
@@ -113,31 +113,31 @@ namespace FDMAMIS
             // 
             this.lblHeader.AutoSize = true;
             this.lblHeader.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHeader.Location = new System.Drawing.Point(81, 11);
+            this.lblHeader.Location = new System.Drawing.Point(40, 11);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(374, 17);
+            this.lblHeader.Size = new System.Drawing.Size(420, 17);
             this.lblHeader.TabIndex = 8;
-            this.lblHeader.Text = "NWA MANAGEMENT INFORMATION SYSTEM v1.0";
+            this.lblHeader.Text = "FATA TDPS MANAGEMENT INFORMATION SYSTEM v1.0";
             this.lblHeader.Click += new System.EventHandler(this.label3_Click);
             // 
-            // label4
+            // lblLoginFooter
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(131, 229);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(256, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Designed, Developed and Maintained by: ICT-FDMA";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.lblLoginFooter.AutoSize = true;
+            this.lblLoginFooter.Location = new System.Drawing.Point(131, 229);
+            this.lblLoginFooter.Name = "lblLoginFooter";
+            this.lblLoginFooter.Size = new System.Drawing.Size(256, 13);
+            this.lblLoginFooter.TabIndex = 9;
+            this.lblLoginFooter.Text = "Designed, Developed and Maintained by: ICT-FDMA";
+            this.lblLoginFooter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblLoginFooter.Click += new System.EventHandler(this.label4_Click);
             // 
             // FrmLogin
             // 
             this.ClientSize = new System.Drawing.Size(496, 246);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblLoginFooter);
             this.Controls.Add(this.lblHeader);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblUserPassword);
+            this.Controls.Add(this.lblUserName);
             this.Controls.Add(this.txtUserPassword);
             this.Controls.Add(this.txtUserName);
             this.Controls.Add(this.btnLogin);
@@ -183,12 +183,7 @@ namespace FDMAMIS
         {
             login();
         }
-
-        private bool CompareStrings(string string1, string string2)
-        {
-            return String.Compare(string1, string2, true, System.Globalization.CultureInfo.InvariantCulture) == 0 ? true : false;
-        }
-
+  
         private void login()
         {
             try
@@ -197,39 +192,30 @@ namespace FDMAMIS
                 {
                     logincon.kon.Open();
                 }
-
-                SqlCommand cmd = new SqlCommand("SELECT USER_NAME,USER_PASSWORD FROM TBL_USERS WHERE USER_NAME='" + txtUserName.Text + "' and USER_PASSWORD='" + txtUserPassword.Text + "'", logincon.kon);
-                SqlDataReader dr = cmd.ExecuteReader();
-                string usertext = txtUserName.Text;
-                string passtext = txtUserPassword.Text;
-
-                while (dr.Read())
-                {
-                    if (this.CompareStrings(dr["USER_NAME"].ToString(), usertext) &&
-                        this.CompareStrings(dr["USER_PASSWORD"].ToString(), passtext))
+                    SqlCommand cmd = new SqlCommand("SELECT USER_NAME,USER_PASSWORD FROM TBL_USERS WHERE USER_NAME='" + txtUserName.Text + "' and USER_PASSWORD='" + txtUserPassword.Text + "'", logincon.kon);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataSet ds = new DataSet();
+                    da.Fill(ds);
+                    int i = ds.Tables[0].Rows.Count;
+                    if (i==1)
                     {
+                        this.Hide();
                         FrmMainWindow MW = new FrmMainWindow();
                         MW.Show();
-                        this.Hide();
                     }
                     else
                     {
-                        MessageBox.Show("Invalid User! Try again with VALID username and password");
-                    }
-                }
-                    dr.Close();
-                    if (logincon.kon.State == ConnectionState.Open)
-                    {
-                        logincon.kon.Close();
+                        MessageBox.Show("Invalid Username or Password, please retry!");
                     }
             }
-             catch (Exception ex)
+           
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                //if (logincon.kon.State == ConnectionState.Open)
-                //{
-                //    logincon.kon.Close();
-                //}
+                if (logincon.kon.State == ConnectionState.Open)
+                {
+                    logincon.kon.Close();
+                }
             }
       }
      }
